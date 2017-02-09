@@ -8,6 +8,7 @@
   "main": "index.py",
   "argument": "",
   "priority": 20,
+  "concurrent": false,
   "hook": [],
   "dependencies": {},
   "repository": "",
