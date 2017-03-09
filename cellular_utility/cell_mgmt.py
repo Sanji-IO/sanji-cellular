@@ -740,9 +740,9 @@ class CellMgmt(object):
         Return True if PIN unlocked.
         """
 
-        _logger.debug("cell_mgmt set_pin")
+        _logger.debug("cell_mgmt unlock_pin")
         try:
-            self._cell_mgmt("set_pin", pin)
+            self._cell_mgmt("unlock_pin", pin)
 
         except ErrorReturnCode_60:
             raise
