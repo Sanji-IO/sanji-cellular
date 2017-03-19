@@ -8,7 +8,10 @@ import os
 import logging
 import re
 import sh
-from sh import ErrorReturnCode, ErrorReturnCode_60, TimeoutException
+from sh import (
+    ErrorReturnCode, ErrorReturnCode_2, ErrorReturnCode_3,
+    ErrorReturnCode_4, ErrorReturnCode_60, TimeoutException
+)
 from subprocess import CalledProcessError
 import thread
 from threading import RLock
@@ -31,6 +34,12 @@ def handle_error_return_code(func, *args, **kwargs):
     try:
         return func(*args, **kwargs)
 
+    except ErrorReturnCode_2:
+        _logger.warning("profile not found")
+    except ErrorReturnCode_3:
+        _logger.warning("operation not support")
+    except ErrorReturnCode_4:
+        _logger.warning("invalid input")
     except ErrorReturnCode:
         _logger.warning(format_exc())
     except TimeoutException:
