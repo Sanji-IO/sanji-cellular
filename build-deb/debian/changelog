@@ -1,20 +1,387 @@
-sanji-bundle-cellular (0.9.9-1) unstable; urgency=low
+sanji-bundle-cellular (3.3.0-1) unstable; urgency=low
 
-  * Bugfix: cannot find cellular utility
+  * feat: Remove phone number query.
+  * feat: Add IMSI.
 
- -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 11 Nov 2015 17:25:18 +0800
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 13 Apr 2017 14:49:02 +0800
 
-sanji-bundle-cellular (0.9.8-1) unstable; urgency=low
+sanji-bundle-cellular (3.2.0-1) unstable; urgency=low
 
-  * Reset module if crashed.
+  * feat: TAC for LTE and NID, BID for CDMA.
 
- -- Aeluin Chen <aeluin.chen@moxa.com>  Tue, 10 Nov 2015 14:24:32 +0800
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Tue, 11 Apr 2017 18:29:55 +0800
 
-sanji-bundle-cellular (0.9.7-1) unstable; urgency=low
+sanji-bundle-cellular (3.1.9-1) unstable; urgency=low
 
-  * Divert `chk_signal` and light signal led.
+  * fix: Update status after disconnected.
 
- -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 04 Nov 2015 18:15:16 +0800
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 05 Apr 2017 17:59:31 +0800
+
+sanji-bundle-cellular (3.1.8-1) unstable; urgency=low
+
+  * fix: Keepalive reboot should include "interface".
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 30 Mar 2017 14:03:43 +0800
+
+sanji-bundle-cellular (3.1.7-1) unstable; urgency=low
+
+  * fix: Remove lock release.
+  * fix: Add return code `99` as module crashed.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 29 Mar 2017 23:33:02 +0800
+
+sanji-bundle-cellular (3.1.6-1) unstable; urgency=low
+
+  * fix: Log exceptions in "handle_error_return_code".
+  * fix: Remove `qmicli`, use `cell_mgmt`.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Mon, 20 Mar 2017 12:39:16 +0800
+
+sanji-bundle-cellular (3.1.5-1) unstable; urgency=low
+
+  * fix: Update exception codes.
+  * fix: Remove & adjust exception scenarios.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Mon, 20 Mar 2017 10:06:35 +0800
+
+sanji-bundle-cellular (3.1.4-1) unstable; urgency=low
+
+  * fix: Response of PUT may wait long time even ttl.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com> Sat, 11 Mar 2017 13:33:30 +0800
+
+sanji-bundle-cellular (3.1.3-1) unstable; urgency=low
+
+  * refactor: Check attach status and update apn by cell_mgmt.
+  * fix: `cell_mgmt set_pin` was deprecated.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Mon, 06 Mar 2017 00:42:50 +0800
+
+sanji-bundle-cellular (3.1.2-1) unstable; urgency=low
+
+  * fix: use `>>` instead of `>` in dependency.
+  * fix: typo makes `get_profiles` failed.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Fri, 24 Feb 2017 11:41:26 +0800
+
+sanji-bundle-cellular (3.1.1-1) unstable; urgency=low
+
+  * Use `cell_mgmt get_profiles` to get profiles.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 23 Feb 2017 21:19:53 +0800
+
+sanji-bundle-cellular (3.1.0-1) unstable; urgency=low
+
+  * docs: `csq` should be integer not string.
+  * fix: Attach after update APN.
+  * fix: Unlock PIN after update APN.
+  * fix: Get info. if SIM exist.
+  * fix: Get PIN retries to check if PIN error.
+  * feat: Add `wan`, `type`, and `mode` in event.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 12 Jan 2017 21:26:46 +0800
+
+sanji-bundle-cellular (3.0.1-1) unstable; urgency=low
+
+  * fix: Missing "reboot" information of "keepalive".
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 09 Nov 2016 17:33:33 +0800
+
+sanji-bundle-cellular (3.0.0-1) unstable; urgency=low
+
+  * feat: Support secondary APN.
+  * feat: Support advanced signal information.
+  * feat: Support phone number.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 19 Oct 2016 17:24:12 +0800
+
+sanji-bundle-cellular (2.1.0-1) unstable; urgency=low
+
+  * fix: sh default timeout
+  * fix: Power cycle the module for unknown crash
+  * fix: Add timeout for RLock in cell_mgmt
+  * feat: Add monit for external keepalive
+  * feat: Use cycles instead of intervalSec
+  * fix: Apply default settings to config
+  * fix: Query signal failed under CDMA.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 25 Aug 2016 16:05:02 +0800
+
+sanji-bundle-cellular (2.0.4-1) unstable; urgency=low
+
+  * Fix: `cell_mgmt` may blocked by `qmi-proxy`.
+  * Fix: unittest.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Fri, 22 Jul 2016 10:42:46 +0800
+
+sanji-bundle-cellular (2.0.3-1) unstable; urgency=low
+
+  * Retrieve cell id and lac from `cell_mgmt m_info`.
+  * Use `--uim-get-card-status` instead of `--dms-uim-get-pin-status`.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 21 Jul 2016 18:11:00 +0800
+
+sanji-bundle-cellular (2.0.2-1) unstable; urgency=low
+
+  * Show `nosim` status for unknown status for SIM card.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Thu, 21 Jul 2016 10:18:26 +0800
+
+sanji-bundle-cellular (2.0.1-1) unstable; urgency=low
+
+  * Update factory settings.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 15 Jun 2016 10:21:59 +0800
+
+sanji-bundle-cellular (2.0.0-1) unstable; urgency=low
+
+  * Provide static APN setting or dynamic with PDP cid.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Tue, 14 Jun 2016 14:28:36 +0800
+
+sanji-bundle-cellular (1.0.36-1) unstable; urgency=low
+
+  * Fix VnStat huge tx,rx issue.
+  * Add default timeout for all qmicli, cell_mgmt.
+  * Set APN into profile.
+  * Check if module attached before connecting.
+  * Combine power_off and power_on to power_cycle.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Tue, 31 May 2016 18:03:38 +0800
+
+sanji-bundle-cellular (1.0.35-1) unstable; urgency=low
+
+  * Power cycle cellular module only when enabled.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 01 Apr 2016 09:57:56 +0800
+
+sanji-bundle-cellular (1.0.34-1) unstable; urgency=low
+
+  * Fix return value type.
+
+ -- Donald Hsu <donald.hsu@moxa.com>  Tue, 22 Mar 2016 11:54:29 +0800
+
+sanji-bundle-cellular (1.0.33-1) unstable; urgency=low
+
+  * Update `/network/interface` API.
+
+ -- Aeluin Chen <aeluin.chen@moxa.com>  Wed, 02 Mar 2016 17:44:45 +0800
+
+sanji-bundle-cellular (1.0.32-1) unstable; urgency=low
+
+  * Add LAC and CellID to GET.
+
+ -- TC Huang <tc.huang@moxa.com>  Wed, 03 Feb 2016 17:59:43 +0800
+
+sanji-bundle-cellular (1.0.31-1) unstable; urgency=low
+
+  * Fix getting CellularInformation failure makes Status stuck at
+    initializing.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 02 Feb 2016 09:52:38 +0800
+
+sanji-bundle-cellular (1.0.30-1) unstable; urgency=low
+
+  * Fix parse error when fetching cellular location with LTE connections.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 01 Feb 2016 14:50:40 +0800
+
+sanji-bundle-cellular (1.0.29-1) unstable; urgency=low
+
+  * Fix nosim may shown when still initializing.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 25 Jan 2016 18:02:08 +0800
+
+sanji-bundle-cellular (1.0.28-1) unstable; urgency=low
+
+  * Use qmicli to retrieve cellular location information.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 25 Jan 2016 16:40:44 +0800
+
+sanji-bundle-cellular (1.0.27-1) unstable; urgency=low
+
+  * Fix qmicli call fails when qmi-proxy not exist.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 25 Jan 2016 13:40:08 +0800
+
+sanji-bundle-cellular (1.0.26-1) unstable; urgency=low
+
+  * Fix qmicli fails often.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 22 Jan 2016 15:26:27 +0800
+
+sanji-bundle-cellular (1.0.25-1) unstable; urgency=low
+
+  * Fix power-cycle continuously when PIN not given.
+  * Wait longer after power-cycle to wait SIM card readiness.
+  * Fix PUT on power-cycle causes module disappear.
+  * Show PIN retry remain when connstion status is PIN.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 22 Jan 2016 10:44:40 +0800
+
+sanji-bundle-cellular (1.0.24-1) unstable; urgency=low
+
+  * Reimplement background thread.
+
+ -- TC Huang <tc.huang@moxa.com>  Wed, 20 Jan 2016 21:37:24 +0800
+
+sanji-bundle-cellular (1.0.23-1) unstable; urgency=low
+
+  * Fix background thread crash issue.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 19 Jan 2016 18:12:25 +0800
+
+sanji-bundle-cellular (1.0.22-1) unstable; urgency=low
+
+  * Retry in 10 seconds with Cellular Observer fail to get cellular log.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 19 Jan 2016 16:08:19 +0800
+
+sanji-bundle-cellular (1.0.21-1) unstable; urgency=low
+
+  * Re-implement cell_mgmt control interface with sh library.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 18 Jan 2016 15:02:12 +0800
+
+sanji-bundle-cellular (1.0.20-1) unstable; urgency=low
+
+  * Fix power-cycle cellular module after system power on if PIN required.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 15 Jan 2016 10:53:47 +0800
+
+sanji-bundle-cellular (1.0.19-1) unstable; urgency=low
+
+  * Fix faulty Connection Status shown while in PIN.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 12 Jan 2016 14:32:14 +0800
+
+sanji-bundle-cellular (1.0.18-1) unstable; urgency=low
+
+  * Support cellular status.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 08 Jan 2016 11:26:39 +0800
+
+sanji-bundle-cellular (1.0.17-1) unstable; urgency=low
+
+  * Fix cell_mgmt busy-retry bug.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 07 Jan 2016 09:25:33 +0800
+
+sanji-bundle-cellular (1.0.16-1) unstable; urgency=low
+
+  * Fix faulty connection status detection method.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 04 Jan 2016 09:54:42 +0800
+
+sanji-bundle-cellular (1.0.15-1) unstable; urgency=low
+
+  * Limit cellular module detection retry.
+
+ -- TC Huang <tc.huang@moxa.com>  Wed, 23 Dec 2015 17:32:11 +0800
+
+sanji-bundle-cellular (1.0.14-1) unstable; urgency=low
+
+  * Add cell_mgmt busy-retry mechanism.
+  * cell_mgmt resource lock to make sure only one command is being called by
+    the same process.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 10 Dec 2015 09:51:01 +0800
+
+sanji-bundle-cellular (1.0.13-1) unstable; urgency=low
+
+  * Continuouly try to detect cellular-module if not exist.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 04 Dec 2015 11:45:55 +0800
+
+sanji-bundle-cellular (1.0.12-1) unstable; urgency=low
+
+  * Write cellular-log to logger instead of a self maintained file.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 03 Dec 2015 17:56:02 +0800
+
+sanji-bundle-cellular (1.0.11-1) unstable; urgency=low
+
+  * Avoid cellular-module not ready when bundle starts.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 01 Dec 2015 17:54:48 +0800
+
+sanji-bundle-cellular (1.0.10-1) unstable; urgency=low
+
+  * Add usage support.
+  * Fix keepalive crash.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 01 Dec 2015 16:35:31 +0800
+
+sanji-bundle-cellular (1.0.9-1) unstable; urgency=low
+
+  * Add ICC-ID, IMEI, and service type support.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 30 Nov 2015 16:07:27 +0800
+
+sanji-bundle-cellular (1.0.8-1) unstable; urgency=low
+
+  * Improve checkalive method.
+
+ -- TC Huang <tc.huang@moxa.com>  Fri, 27 Nov 2015 11:27:49 +0800
+
+sanji-bundle-cellular (1.0.7-1) unstable; urgency=low
+
+  * Avoid cellular module not being ready when cellular-bundle starts.
+  * Don't try to dial up if no SIM exist.
+  * Detect whether cellular module exists or not.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 19 Nov 2015 11:38:36 +0800
+
+sanji-bundle-cellular (1.0.6-1) unstable; urgency=low
+
+  * Add event log support.
+
+ -- TC Huang <tc.huang@moxa.com>  Mon, 16 Nov 2015 13:14:09 +0800
+
+sanji-bundle-cellular (1.0.5-1) unstable; urgency=low
+
+  * Fix bundle.json .
+
+ -- Zack YL Shih <zackyl.shih@moxa.com>  Fri, 13 Nov 2015 14:53:21 +0800
+
+sanji-bundle-cellular (1.0.4-1) unstable; urgency=low
+
+  * Refactor.
+
+ -- TC Huang <tc.huang@moxa.com>  Wed, 11 Nov 2015 16:17:19 +0800
+
+sanji-bundle-cellular (1.0.3-1) unstable; urgency=low
+
+  * Always pass "Username=" and "Password=" when calling "cell_mgmt start".
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 10 Nov 2015 10:43:31 +0800
+
+sanji-bundle-cellular (1.0.2-1) unstable; urgency=low
+
+  * Fix daemon thread stop-ability.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 05 Nov 2015 16:55:50 +0800
+
+sanji-bundle-cellular (1.0.1-1) unstable; urgency=low
+
+  * Fix cellular connection fails when keepalive not set.
+  * Fix cellular connection fails when DNS not provided by carrier.
+  * Fix cellular connection fails when operator name is empty.
+
+ -- TC Huang <tc.huang@moxa.com>  Tue, 03 Nov 2015 16:21:04 +0800
+
+sanji-bundle-cellular (1.0.0-1) unstable; urgency=low
+
+  * Fix PIN stored improperly.
+  * Update major version number.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 29 Oct 2015 16:53:03 +0800
+
+sanji-bundle-cellular (0.10.0-1) unstable; urgency=low
+
+  * Re-implement to utilize cell_mgmt utility.
+
+ -- TC Huang <tc.huang@moxa.com>  Thu, 29 Oct 2015 14:36:09 +0800
 
 sanji-bundle-cellular (0.9.6-1) unstable; urgency=low
 

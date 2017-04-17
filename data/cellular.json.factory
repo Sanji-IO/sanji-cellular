@@ -1,20 +1,30 @@
 [
   {
     "id": 1,
-    "apn": "internet",
-    "username": "",
-    "enable": 0,
-    "name": "wwan1",
-    "ip": "",
-    "gateway": "",
-    "dns": "",
-    "dialNumber": "*99#",
-    "password": "",
+
+    "enable": false,
     "pinCode": "",
-    "status": 0,
-    "authType": "PAP",
-    "modemPort": "/dev/cdc-wdm1",
-    "atPort": "/dev/ttyUSB2",
-    "enableAuth": 0
+    "pdpContext": {
+      "static": true,
+      "id": 1,
+      "retryTimeout": 600,
+      "primary": {
+        "apn": "internet",
+        "type": "ipv4v6"
+      },
+      "secondary": {
+        "type": "ipv4v6"
+      }
+    },
+
+    "keepalive": {
+      "enable": true,
+      "targetHost": "8.8.8.8",
+      "intervalSec": 60,
+      "reboot": {
+        "enable": false,
+        "cycles": 1
+      }
+    }
   }
 ]

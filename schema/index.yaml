@@ -1,0 +1,365 @@
+swagger: '2.0'
+info:
+  title: Cellular API
+  description: Handle the Cellular interface(s)
+  version: "3.0.1"
+
+schemes:
+  - http
+  - https
+produces:
+  - application/json
+paths:
+  /network/cellulars:
+    get:
+      summary: Cellular Interface(s)
+      description: |
+        The system returns information about the settings of all
+        *Cellular interface(s)*.
+      responses:
+        200:
+          description: An array of Cellular interface(s)
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cellular'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Cellulars'
+              }
+            }
+
+  /network/cellulars/{id}:
+    parameters:
+      - name: id
+        in: path
+        type: integer
+        required: true
+    get:
+      description: |
+        Get settings of indicated Cellular interface.
+      responses:
+        200:
+          description: An Cellular interface settings.
+          schema:
+            $ref: '#/definitions/Cellular'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Cellular'
+              }
+            }
+    put:
+      summary: Cellular Interface
+      description: Update an Cellular interface settings.
+      parameters:
+      - name: body
+        in: body
+        description: ''
+        required: true
+        schema:
+          $ref: '#/definitions/Cellular'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/Cellular'
+          examples:
+            {
+              "application/json": {
+                $ref: '#/externalDocs/x-mocks/Cellular'
+              }
+            }
+
+definitions:
+  Cellular:
+    title: Cellular
+    required:
+    - id
+    - enable
+    - pinCode
+    - pdpContext
+    - keepalive
+    properties:
+      id:
+        type: integer
+        description: Identifier for an Cellular interface.
+      name:
+        type: string
+        description: Interface name.
+      mode:
+        type: string
+        description: Given cellular connection mode. Could be one of `"umts"`, `"lte"`.
+      signal:
+        type: object
+        description: Cellular RF signal strength, include RSSI and EcIo.
+        required:
+        - csq
+        - rssi
+        - ecio
+        properties:
+          csq:
+            type: integer
+            description: |
+              Signal quality, Only shows the first part of the response, RSSI
+              (Received signal strength indicator).
+          rssi:
+            type: integer
+            description: |
+              Cellular RF signal strength, in `dbm`. Value `0` indicates no
+              SIM card found.
+          ecio:
+            type: integer
+            description: |
+              The ratio of the received energy per chip (= code bit) and the
+              interference level, given in `dBm`.
+      operatorName:
+        type: string
+        description: Indicate current operator name if exist.
+      lac:
+        type: string
+        description: Location area code.
+      tac:
+        type: string
+        description: Tracking area code (LTE).
+      nid:
+        type: string
+        description: Network ID (CDMA).
+      cellId:
+        type: string
+        description: Cell ID.
+      bid:
+        type: string
+        description: Base station ID (CDMA).
+      iccId:
+          type: string
+          description: ICC ID of SIM card.
+      imsi:
+        type: string
+        description: IMSI of SIM card.
+      imei:
+        type: string
+        description: IMEI of cellular module.
+      pinRetryRemain:
+        type: integer
+        description: PIN Retry remaining.
+      status:
+        type: string
+        description: Indicate current status of cellular connection. Could be one of "nosim", "pin", "noservice", "ready", "connected", "connecting", "connect-failed".
+      ip:
+        type: string
+        pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+        description: IP address. `""` when not connected.
+      netmask:
+        type: string
+        pattern: ^(254|252|248|240|224|192|128)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)
+        description: Subnet mask. `""` when not connected.
+      gateway:
+        type: string
+        pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+        description: Gateway IP address. `""` when not connected.
+      dns:
+        type: array
+        description: A list of DNS IP addresses. `[]` when not connected.
+        items:
+          type: string
+          pattern: ^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
+      usage:
+        type: object
+        description: Data usage.
+        required:
+        - txkbyte
+        - rxkbyte
+        properties:
+          txkbyte:
+            type: integer
+            description: Amount of data transmitted, in Kbytes.
+          rxkbyte:
+            type: integer
+            description: Amount of data received, in Kbytes.
+      enable:
+        type: boolean
+        description: Enable Cellular Networking.
+      pdpContext:
+        type: object
+        description: PDP context data for dialing up to Cellular Network.
+        required:
+        - static
+        - id
+        - primary
+        - secondary
+        properties:
+          static:
+            type: boolean
+            description: Use static APN or dynamic.
+          id:
+            type: integer
+            description: Specifies PDP context id.
+            minimum: 1
+            maximum: 16
+          retryTimeout:
+            type: integer
+            description: |
+              Retry timeout in seconds for static APN to switch primary to
+              secondary settings.
+            minimum: 60
+            maximum: 86400
+          primary:
+            type: object
+            description: Primary PDP context.
+            properties:
+              apn:
+                type: string
+                description: Edit APN of the specified PDP context.
+              type:
+                type: string
+                description: Indicate the PDP type to use.
+                enum:
+                - ipv4
+                - ipv6
+                - ipv4v6
+          secondary:
+            type: object
+            description: Secondary PDP context.
+            properties:
+              apn:
+                type: string
+                description: Edit APN of the specified PDP context.
+              type:
+                type: string
+                description: Indicate the PDP type to use.
+                enum:
+                - ipv4
+                - ipv6
+                - ipv4v6
+          list:
+            readOnly: true
+            type: array
+            description: PDP context list.
+            items:
+              type: object
+              description: An PDP context
+              required:
+              - id
+              - apn
+              - type
+              properties:
+                id:
+                  type: integer
+                  minimum: 1
+                  maximum: 16
+                apn:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                  - ipv4
+                  - ipv6
+                  - ipv4v6
+      pinCode:
+        type: string
+        description: PIN code of SIM card. Takes no effect when SIM card PIN weren't not set.
+      keepalive:
+        type: object
+        description: Keep-alive configuration.
+        required:
+        - enable
+        - targetHost
+        - intervalSec
+        properties:
+          enable:
+            type: boolean
+            description: Enable/disable Cellular connection keep-alive by ping.
+          targetHost:
+            type: string
+            description: IP address to ping.
+          intervalSec:
+            type: integer
+            description: Check alive interval.
+          reboot:
+            type: object
+            description: |
+              Reboot system while check alive failed after a defined cycle(s).
+            properties:
+              enable:
+                type: boolean
+                description: |
+                  Enable/disable reboot policy for check alive failed.
+              cycles:
+                type: integer
+                description: |
+                  Define cycles to check if reboot is required; a cycle is
+                  a global value defined by system, default should be 30
+                  minutes.
+    example:
+          $ref: '#/externalDocs/x-mocks/Cellular'
+
+externalDocs:
+  url: '#'
+  x-mocks:
+    Cellular:
+      {
+        "id": 1,
+        "name": "wwan1",
+        "mode": "umts",
+        "signal": {
+          "csq": 14,
+          "rssi": -76,
+          "ecio": -8.5
+        },
+        "operatorName": "Chunghwa Telecom",
+        "lac": "11114",
+        "tac": "",
+        "nid": "",
+        "cellId": "1249",
+        "bid": "",
+        "iccId": "",
+        "imsi": "466977502877452",
+        "imei": "356853050370859",
+        "pinRetryRemain": 3,
+        "status": "connected",
+        "ip": "111.70.146.125",
+        "netmask": "255.255.255.252",
+        "gateway": "111.70.146.126",
+        "dns": ["168.95.1.1" , "168.95.192.1"],
+        "usage": {
+            "txkbyte": 40023,
+            "rxkbyte": 3493
+        },
+        "enable": true,
+        "pdpContext": {
+          "static": true,
+          "id": 1,
+          "retryTimeout": 1200,
+          "primary": {
+            "apn": "internet",
+            "type": "ipv4v6",
+          },
+          "secondary": {
+            "apn": "internet",
+            "type": "ipv4v6",
+          },
+          "list": [
+            {
+              "id": 1,
+              "apn": "internet",
+              "type": "ipv4v6"
+            }
+          ]
+        },
+        "pinCode": "0000",
+        "keepalive": {
+          "enable": true,
+          "targetHost": "8.8.8.8",
+          "intervalSec": 60,
+          "reboot": {
+            "enable": false,
+            "cycles": 1
+          }
+        }
+      }
+    Cellulars:
+      [
+        $ref: '#/externalDocs/x-mocks/Cellular'
+      ]

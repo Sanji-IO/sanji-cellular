@@ -1,21 +1,21 @@
 {
   "name": "cellular",
-  "version": "0.9.9",
+  "version": "3.3.0",
   "author": "Aeluin Chen",
   "email": "aeluin.chen@moxa.com",
-  "description": "This model provides cellular using QMI.",
+  "description": "Provides the cellular configuration interface",
   "license": "MOXA",
-  "main": "cellular.py",
+  "main": "index.py",
   "argument": "",
   "priority": 20,
   "hook": [],
   "dependencies": {},
   "repository": "",
   "role": "model",
-  "ttl": 10,
+  "ttl": 60,
   "resources": [
     {
-      "methods": ["get", "put"],
+      "methods": ["get"],
       "resource": "/network/cellulars"
     },
     {

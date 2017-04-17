@@ -15,22 +15,24 @@ TARGET_FILES = \
 	LICENSE \
 	bundle.json \
 	requirements.txt \
-	cellular.py \
-	chk_signal \
-	data/cellular.json.factory \
-	hooks/cellular-dhclient-hook \
+	index.py \
+	cellular_utility/__init__.py \
 	cellular_utility/cell_mgmt.py \
-	cellular_utility/__init__.py
+	cellular_utility/event.py \
+	cellular_utility/management.py \
+	cellular_utility/vnstat.py \
+	data/cellular.json.factory
+
 DIST_FILES= \
 	$(TARGET_FILES) \
 	README.md \
 	Makefile \
-	cellular_utility/tests/__init__.py \
-	cellular_utility/tests/test_cell_mgmt.py \
+	tests/__init__.py \
 	tests/requirements.txt \
-	tests/test_cellular.py \
-	tests/test_e2e/bundle.json \
-	tests/test_e2e/view_cellular.py
+	tests/test_index.py \
+	cellular_utility/tests/__init__.py \
+	cellular_utility/tests/test_cell_mgmt.py
+
 INSTALL_FILES=$(addprefix $(INSTALL_DIR)/,$(TARGET_FILES))
 STAGING_FILES=$(addprefix $(PROJECT_STAGING_DIR)/,$(DIST_FILES))
 
@@ -45,9 +47,9 @@ clean:
 distclean: clean
 
 pylint:
-	flake8 -v --exclude=.git,__init__.py .
+	flake8 -v --exclude=.git,__init__.py,.env .
 test:
-	nosetests --with-coverage --cover-erase --cover-package=$(NAME) -v
+	nosetests --with-coverage --cover-erase --cover-package=index,cellular_utility -v
 
 dist: $(ARCHIVE)
 
